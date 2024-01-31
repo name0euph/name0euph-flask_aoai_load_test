@@ -21,10 +21,10 @@ terraform {
   required_version = ">= 1.1.0"
 
   backend "azurerm" {
-    resource_group_name  = "rg-jfest-tfstate"
-    storage_account_name = "tfjfestaoaiapp"
-    container_name       = "tfstate-dev"
-    key                  = "terraform.tfstate"
+  resource_group_name  = "rg-jfest-tfstate"
+  storage_account_name = "tfjfestaoaiapp"
+  container_name       = "tfstate-dev"
+  key                  = "terraform.tfstate"
   }
 }
 
