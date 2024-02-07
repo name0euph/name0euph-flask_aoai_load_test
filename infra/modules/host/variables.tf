@@ -1,0 +1,11 @@
+variable "env" {}
+variable "company" {}
+variable "location" {}
+variable "rg_name" {}
+variable "vnetint_subnet_id" {}
+variable "aoai_name" {}
+variable "aoai_key" {}
+variable "cosmosdb_name" {}
+variable "cosmosdb_key" {}
+variable "trsl_name" {}
+variable "trsl_key" {}

@@ -1,4 +1,4 @@
 # 変数を定義するファイル
 env                = "dev" # stg/prd
-company            = "jfest"
+company            = "mycompany"
 location           = "japaneast"
