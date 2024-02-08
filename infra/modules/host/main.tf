@@ -94,3 +94,101 @@ resource "azurerm_linux_web_app" "app" {
     Company     = var.company
   }
 }
+
+# App ServiceのAutoScale設定
+resource "azurerm_monitor_autoscale_setting" "app" {
+  name                = "autoscale-${local.app_name}"
+  resource_group_name = var.rg_name
+  location            = var.location
+  target_resource_id  = azurerm_service_plan.asp.id
+
+  profile {
+    name = "defaultProfile"
+
+    capacity {
+      default = 1
+      minimum = 1
+      maximum = 3
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "CpuPercentage"
+        metric_resource_id = azurerm_service_plan.asp.id
+        operator           = "GreaterThan"
+        statistic          = "Average"
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT5M"
+        threshold          = 70
+      }
+
+      scale_action {
+        direction = "Increase"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "CpuPercentage"
+        metric_resource_id = azurerm_service_plan.asp.id
+        operator           = "LessThan"
+        statistic          = "Average"
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT5M"
+        threshold          = 30
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "MemoryPercentage"
+        metric_resource_id = azurerm_service_plan.asp.id
+        operator           = "GreaterThan"
+        statistic          = "Average"
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT5M"
+        threshold          = 80
+      }
+
+      scale_action {
+        direction = "Increase"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "MemoryPercentage"
+        metric_resource_id = azurerm_service_plan.asp.id
+        operator           = "LessThan"
+        statistic          = "Average"
+        time_aggregation   = "Average"
+        time_grain         = "PT1M"
+        time_window        = "PT5M"
+        threshold          = 60
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT5M"
+      }
+    }
+  }
+}
