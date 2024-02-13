@@ -191,4 +191,13 @@ resource "azurerm_monitor_autoscale_setting" "app" {
       }
     }
   }
+
+  # 通知設定
+  notification {
+    email {
+      send_to_subscription_administrator    = false
+      send_to_subscription_co_administrator = false
+      custom_emails                         = ["ryouta-arisaka@jfe-systems.com"]
+    }
+  }
 }
