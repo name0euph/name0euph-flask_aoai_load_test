@@ -81,7 +81,7 @@ locals {
       location = "japaneast"
     },
     westus2 = {
-      location = "westus2"
+      location = "westus"
     }
   }
 }
@@ -125,6 +125,10 @@ resource "azurerm_api_management" "apim" {
   publisher_email     = "ryouta-arisaka@jfe-systems.com"
 
   sku_name = "Developer_1"
+  virtual_network_type = "Internal"
+  virtual_network_configuration {
+    subnet_id = azurerm_subnet.appint_subnet["snet-apiint"].id
+  }
 }
 
 # Log Analyticsを作成
@@ -154,4 +158,3 @@ resource "azurerm_application_insights" "app_insights" {
     Company     = var.company
   }
 }
-
