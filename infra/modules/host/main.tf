@@ -61,14 +61,13 @@ resource "azurerm_linux_web_app" "app" {
     AZURE_COSMOSDB_LOGGING_CONTAINER         = "logging"
     AZURE_OPENAI_EMBEDDING_ENDPOINT          = ""
     AZURE_OPENAI_EMBEDDING_KEY               = ""
-    AZURE_OPENAI_ENDPOINT                    = ""
     AZURE_OPENAI_GPT_35_TURBO_16K_DEPLOYMENT = "ChatGPT-35-turbo-16k"
     AZURE_OPENAI_GPT_35_TURBO_DEPLOYMENT     = "ChatGPT-35-turbo"
     AZURE_OPENAI_GPT_4_32K_DEPLOYMENT        = ""
     AZURE_OPENAI_GPT_4_DEPLOYMENT            = "ChatGPT-4"
-    AZURE_OPENAI_KEY                         = var.aoai_key
+    AZURE_OPENAI_API_KEY                     = var.aoai_key
     AZURE_OPENAI_MODEL                       = "ChatGPT-35-turbo"
-    AZURE_OPENAI_PREVIEW_API_VERSION         = "2023-06-01-preview"
+    AZURE_OPENAI_API_VERSION                 = "2023-12-01-preview"
     AZURE_OPENAI_RESOURCE                    = var.aoai_name
     AZURE_OPENAI_STOP_SEQUENCE               = ""
     AZURE_OPENAI_STREAM                      = ""
@@ -88,7 +87,7 @@ resource "azurerm_linux_web_app" "app" {
       }
     }
   }
- 
+
   tags = {
     Environment = var.env,
     Company     = var.company

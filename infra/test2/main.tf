@@ -205,8 +205,8 @@ module "app_service" {
   location = var.location
   rg_name = azurerm_resource_group.rg.name
   vnetint_subnet_id = azurerm_subnet.appint_subnet["snet-appint"].id
-  aoai_name = ""
-  aoai_key = ""
+  aoai_name = azurerm_cognitive_account.cogac["japaneast"].name
+  aoai_key = azurerm_cognitive_account.cogac["japaneast"].primary_access_key
   cosmosdb_name = ""
   cosmosdb_key = ""
   trsl_name = ""
